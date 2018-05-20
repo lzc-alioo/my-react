@@ -1,9 +1,11 @@
-从0搭建React项目
-
 >参考网址：https://www.jianshu.com/p/324fd1c124ad
+看过很多react的入门文章，上面的这一篇链接是看过最好的了，不过依旧会有一些跳跃，刚入门的小伙伴参照进行练习时难免会卡住，特重新整理一遍，既加强自己的记忆，又能帮助到其它小伙伴。
 
 
-基础篇，搭建
+#基础篇，搭建
+##项目目录创建，及必备依赖安装
+（这篇文章的前提是node.js你已经安装过了，如果不会的话可以留言，手把手教你）
+
 ```
 mkdir my-react
 cd my-react
@@ -16,30 +18,35 @@ npm install --save react react-dom
 npm install --save webpack webpack-dev-server webpack-cli
 npm install --save babel-core babel-cli babel-polyfill babel-loader babel-runtime babel-plugin-transform-runtime  babel-preset-es2015 babel-preset-react babel-preset-stage-2
 
-
 ```
 
-#打开 package.json 然后添加下面的scripts:
+##修改package\.json 
+添加下面的scripts内容
+```
 "scripts": {
   "dev": "webpack-dev-server --mode production ",
   "build": "webpack  --mode production"
 }
-
+```
 
 命令行输入 npm run dev 将要启动webpack-dev-server 
 命令行输入 npm run build 将会进行生产环境打包
 
-#启动webpack
+##启动webpack
 至此，React项目已经搭建好了，启动吧
+```
 npm run dev
+```
 
+##浏览器效果
 这个时候打开浏览器访问 localhost:8080/就可以看到东东了
+![这里写图片描述](https://img-blog.csdn.net/2018052015382459?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hsX2phdmE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 
+#进阶篇，使用React创建类
 
-进阶篇，使用React创建类
-在my-react目录中创建index.html
-
+##在my-react目录中创建index.html
+```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,10 +59,11 @@ npm run dev
   <script src="bundle.js"></script>
 </body>
 </html>
+```
 
-
+##创建app.js，webpack.config.js
 在my-react目录中创建子目录src,在src中创建文件app.js，内容如下
-
+```
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -70,12 +78,11 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-
+```
 在my-react目录中创建webpack.config.js，内容如下
 该文件名是默认命名，如果叫其它名字，比如webpack.config.prod.js，则需要在script中进行显性指定
 "build": "webpack --mode production webpack.config.prod.js"
-
+```
 var webpack = require('webpack');
 module.exports = {
   entry: './src/app.js',        //默认配置：./src/index.js
@@ -98,13 +105,16 @@ module.exports = {
       }]
   }
 };
+```
+##浏览器效果
+![这里写图片描述](https://img-blog.csdn.net/20180520154016609?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hsX2phdmE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-打开浏览器查看效果
 
+#实战篇：创建可复用的组件
 
-实战篇：创建可复用的组件
-
+##创建components组件
 在my-react目录中创建components文件夹，并在components文件夹中创建文件 ToDoApp.js
+```
 import React from 'react';
 class ToDoApp extends React.Component {
   render() {
@@ -115,9 +125,10 @@ class ToDoApp extends React.Component {
 }
 
 export default ToDoApp;
+```
 
-
-重新编辑my-react/src/app.js
+##重新编辑my-react/src/app.js
+```
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ToDoApp from '../components/ToDoApp';
@@ -134,14 +145,15 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+```
 
 
+##浏览器效果
+![这里写图片描述](https://img-blog.csdn.net/20180520154205280?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hsX2phdmE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-打开浏览器看看效果吧
-react3,png
 
-
-进一步迭代app.js return方法里内容
+##进一步迭代app.js return方法里内容
+```
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ToDoApp from '../components/ToDoApp';
@@ -165,13 +177,15 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+```
+
+##浏览器效果
+![这里写图片描述](https://img-blog.csdn.net/20180520154257489?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hsX2phdmE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 
-效果
-react4,png
-
-接下来搞个真实的列表
+##接下来搞个真实的列表
 创建my-react/components/List.js,内容如下：
+```
 import React from 'react';
 
 const List = (props) => {
@@ -192,8 +206,10 @@ const List = (props) => {
 };
 
 export default List;
+```
 
 修改my-react/components/ToDoApp.js，内容为：
+```
 import React from 'react';
 import List from '../components/List';
 
@@ -216,14 +232,16 @@ class ToDoApp extends React.Component {
 }
 
 export default ToDoApp;
+```
+##浏览器效果
+![这里写图片描述](https://img-blog.csdn.net/2018052015462149?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hsX2phdmE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-看看效果吧
-react5.png
 
 
+##给APP添加功能
+创建my-react/components/Input.js,内容如下
 
-给APP添加功能
-创建my-react/components/Input.js,内容如下：
+```
 import React from 'react';
 
 class Input extends React.Component {
@@ -256,12 +274,10 @@ class Input extends React.Component {
 }
 
 export default Input;
-
-
-
-
+```
 
 修改my-react/components/ToDoApp.js，内容为：
+```
 import React from 'react';
 import List from '../components/List';
 import Input from '../components/Input';
@@ -284,6 +300,7 @@ class ToDoApp extends React.Component {
 }
 
 export default ToDoApp;
+```
 
 这时候会发现一个输入框和按钮的视图，这个组件的静态视图已经写好了，下面就需要添加功能了。
 
@@ -295,7 +312,7 @@ ok，我们在ToDoApp的 componentWillMount的setState中新增一个newToDo属�
 
 好了，直接看代码吧
 修改my-react/components/ToDoApp.js，内容为：
-
+```
 import React from 'react';
 import List from '../components/List';
 import Input from '../components/Input';
@@ -338,9 +355,10 @@ class ToDoApp extends React.Component {
 }
 
 export default ToDoApp;
-
+```
 
 修改my-react/components/Input.js,内容如下：
+```
 import React from 'react';
 
 class Input extends React.Component {
@@ -375,8 +393,7 @@ class Input extends React.Component {
 }
 
 export default Input;
-
-
+```
 备注：还没有搞明白修改newToDo 与list 的方式为什么不一致
 
 this.setState((previousState)=>({
@@ -392,10 +409,14 @@ this.setState((previousState)=>({
 简书就此问题描述如下：
 正如我上面的描述，最开始写state的时候很多人都会犯这样的错误，直接用push这样的方法，修改了state，这样就不算immutable的，我们一定要保证绝不直接修改原state。
 
+##浏览器效果
 看看效果吧
+![这里写图片描述](https://img-blog.csdn.net/2018052015475036?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hsX2phdmE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 
-
+#项目源代码
+整个项目我都放置到github上了，有兴趣的话可以下载下来看看
+https://github.com/lzc-alioo/my-react
 
 
 
