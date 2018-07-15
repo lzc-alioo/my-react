@@ -1,25 +1,20 @@
 import React from 'react';
-import List from '../components/List';
+import Select from '../components/Select';
 import Input from '../components/Input';
 
-class ToDoApp extends React.Component {
+class ToDoSelect extends React.Component {
 
   componentWillMount() {
     this.setState({  
       list: ['thing1', 'thing2', 'thing3'],  
       newToDo: 'test'  ,
-      inputLabel: '柳志崇'
+      inputLabel: '柳海洋'
     })  
   } ;
 
   handleChange=(event) =>{
   	console.log("aa", event.target.value ) 
     this.setState({ newToDo: event.target.value});
-
- //    this.setState((previousState)=>({
-	//   list: [...previousState.list, previousState.newToDo ],
-	//   newToDo: ''
-	// }));
 
   };
 
@@ -39,13 +34,13 @@ class ToDoApp extends React.Component {
       <div>
       	<Input label={this.state.inputLabel} newToDo={this.state.newToDo } updateStateProp={this.handleChange} updateStateClick={this.handleClick }/>
 
-      	<List listItems={this.state.list } />
+      	<Select listItems={this.state.list } />
       </div>
     );
   }
 }
 
-export default ToDoApp;
+export default ToDoSelect;
 
 
 

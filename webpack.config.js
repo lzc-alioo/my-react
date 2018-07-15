@@ -1,9 +1,11 @@
 var webpack = require('webpack');
 module.exports = {
+  mode: 'production',
   entry: './src/app.js',        //默认配置：./src/index.js
   output: {
       path: __dirname + '/build', //默认配置：/dist
       filename: "bundle.js"       //默认配置：main.js
+      // filename: '[name].bundle.js'
   },
   module: {
       rules: [{
@@ -18,5 +20,13 @@ module.exports = {
           test: /\.css$/,
           loader: "style-loader!css-loader"
       }]
-  }
+  },
+  //  plugins: {
+  //   new webpack.optimize.CommonsChunkPlugin('vendor',  'vendor.js')
+  // }
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all'
+  //   }
+  // }
 };

@@ -9,7 +9,7 @@ class Input extends React.Component {
 		    className="form-group">
 		    <label
 		      htmlFor="listInput">
-		      Email address
+		      a{this.props.label }b
 		    </label>
 		    <input
 		      type="text"

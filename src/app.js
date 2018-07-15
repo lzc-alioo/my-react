@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ToDoApp from '../components/ToDoApp';
+import ToDoSelect from '../components/ToDoSelect';
+
 
 class App extends React.Component {
   render(){ // Every react component has a render method.
@@ -13,6 +15,9 @@ class App extends React.Component {
 		        <hr/>
 		        List goes here.
 		        <ToDoApp />
+		        <br />
+		        <ToDoSelect />
+
 		      </div>
 		    </div>
 		  </div>
